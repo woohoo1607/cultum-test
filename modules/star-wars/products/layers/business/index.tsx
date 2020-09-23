@@ -5,7 +5,7 @@ import { ProductsAPIContext } from '@md-sw-products/layers/api/products';
 import { Product } from '@md-modules/shared/mock';
 
 interface Context {
-  productsList: Pick<Product, 'id' | 'name' | 'img'>[];
+  productsList: Pick<Product, 'id' | 'name' | 'img' | 'price'>[];
 }
 
 const ProductsBLContext = React.createContext<Context>({
