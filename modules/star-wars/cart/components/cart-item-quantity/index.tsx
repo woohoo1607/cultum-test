@@ -2,11 +2,17 @@ import * as React from 'react';
 // views
 import { CartItemQuantityWrapper, CartItemQuantityButton, CartItemQuantityP } from './views';
 
-const CartItemQuantity = () => (
+interface Props {
+  quantity: number;
+  addItem(): void;
+  subtractItem(): void;
+}
+
+const CartItemQuantity: React.FC<Props> = ({ quantity, addItem, subtractItem }) => (
   <CartItemQuantityWrapper>
-    <CartItemQuantityButton>-</CartItemQuantityButton>
-    <CartItemQuantityP>2</CartItemQuantityP>
-    <CartItemQuantityButton>+</CartItemQuantityButton>
+    <CartItemQuantityButton onClick={subtractItem}>-</CartItemQuantityButton>
+    <CartItemQuantityP>{quantity}</CartItemQuantityP>
+    <CartItemQuantityButton onClick={addItem}>+</CartItemQuantityButton>
   </CartItemQuantityWrapper>
 );
 

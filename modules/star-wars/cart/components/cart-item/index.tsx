@@ -13,26 +13,46 @@ import {
   CartItemTotalPrice
 } from './views';
 import { CartItemQuantity } from '../cart-item-quantity';
-
-const CartItem = () => (
-  <CartItemWrapper>
-    <CartItemImgWrapper>
-      <CartItemImg src={'https://hotline.ua/img/tx/235/2354952435.jpg'} alt='img' />
-    </CartItemImgWrapper>
-    <CartItemInfo>
-      <CartItemHeader>
-        <CartItemTitle> Product Title </CartItemTitle>
-        <DeleteButton>
-          <img src='/static/icons/delete-icon.png' alt='delete-icon' />
-        </DeleteButton>
-      </CartItemHeader>
-      <CartItemBody>
-        <CartItemQuantity />
-        <CartItemPrice>x $130</CartItemPrice>
-        <CartItemTotalPrice>$260</CartItemTotalPrice>
-      </CartItemBody>
-    </CartItemInfo>
-  </CartItemWrapper>
-);
+interface Props {
+  id: string;
+  name: string;
+  img: string;
+  price: number;
+  quantity: number;
+  deleteFromCart(id: string): void;
+  addToCart(id: string): void;
+  subtractFromCart(id: string): void;
+}
+const CartItem: React.FC<Props> = ({ name, img, quantity, id, price, subtractFromCart, deleteFromCart, addToCart }) => {
+  const deleteItem = (id: string) => () => {
+    deleteFromCart(id);
+  };
+  const addItem = () => {
+    addToCart(id);
+  };
+  const subtractItem = () => {
+    subtractFromCart(id);
+  };
+  return (
+    <CartItemWrapper>
+      <CartItemImgWrapper>
+        <CartItemImg src={img} alt={`${name}-${id}`} />
+      </CartItemImgWrapper>
+      <CartItemInfo>
+        <CartItemHeader>
+          <CartItemTitle> {name} </CartItemTitle>
+          <DeleteButton onClick={deleteItem(id)}>
+            <img src='/static/icons/delete-icon.png' alt='delete-icon' />
+          </DeleteButton>
+        </CartItemHeader>
+        <CartItemBody>
+          <CartItemQuantity quantity={quantity} addItem={addItem} subtractItem={subtractItem} />
+          <CartItemPrice>x ${price}</CartItemPrice>
+          <CartItemTotalPrice>${price * quantity}</CartItemTotalPrice>
+        </CartItemBody>
+      </CartItemInfo>
+    </CartItemWrapper>
+  );
+};
 
 export { CartItem };

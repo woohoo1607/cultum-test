@@ -1,25 +1,61 @@
 import * as React from 'react';
 // utils
-import { CartProduct } from '@md-utils/localStorage/query';
+import { ICart } from '@md-utils/localStorage/query';
+import { Product } from '@md-modules/shared/mock';
+import { ProductsCartAPIContext } from '../api/products';
+
+export interface CartProduct extends Product {
+  quantity: number;
+}
 
 interface Context {
-  productsList: CartProduct[] | [];
+  productsList: Pick<CartProduct, 'id' | 'name' | 'img' | 'price' | 'quantity'>[];
   setCart?: React.Dispatch<any>;
   isOpen: boolean;
   closeModalCart(): void;
   openModalCart(): void;
+  addToCart(id: string): void;
+  deleteFromCart(id: string): void;
+  subtractFromCart(id: string): void;
 }
 /*const {value: productsList, setValue: setCart} = useLocalStorage();*/
 
 const CartBLContext = React.createContext<Context>({
-  productsList: [{ id: '1', quantity: 2 }],
+  productsList: [],
   isOpen: false,
   closeModalCart: () => {},
-  openModalCart: () => {}
+  openModalCart: () => {},
+  addToCart: () => {},
+  deleteFromCart: () => {},
+  subtractFromCart: () => {}
 });
 const CartBLContextProvider: React.FC = ({ children }) => {
-  const [productsList, setCart] = React.useState<CartProduct[] | []>([]);
+  const [Cart, setCart] = React.useState<ICart[]>([
+    { id: '1', quantity: 2 },
+    { id: '3', quantity: 3 }
+  ]);
   const [isOpen, setIsOpen] = React.useState(false);
+  const { products } = React.useContext(ProductsCartAPIContext);
+  const productsList = React.useMemo<Pick<CartProduct, 'id' | 'name' | 'img' | 'price' | 'quantity'>[]>(() => {
+    if (!products || !Cart.length) {
+      return [];
+    }
+
+    return Cart.map(({ id, quantity }: ICart) => {
+      const product: Product = products.filter((product: Product) => product.id === id)[0];
+      if (!product) {
+        return;
+      }
+      return {
+        id,
+        quantity,
+        name: product.name,
+        img: product.img,
+        price: product.price
+      };
+    });
+  }, [products, Cart]);
+
   const closeModalCart = () => {
     setIsOpen(false);
   };
@@ -27,12 +63,52 @@ const CartBLContextProvider: React.FC = ({ children }) => {
     setIsOpen(true);
   };
 
+  const addToCart = (id: string) => {
+    const copyCart = JSON.parse(JSON.stringify(Cart));
+    const index = copyCart.findIndex((p: ICart) => p.id === id);
+    if (index === -1) {
+      copyCart.push({ id: id, quantity: 1 });
+    } else {
+      copyCart[index].quantity = copyCart[index].quantity + 1;
+    }
+    setCart(copyCart);
+  };
+
+  const subtractFromCart = (id: string) => {
+    const copyCart = JSON.parse(JSON.stringify(Cart));
+    const index = copyCart.findIndex((p: ICart) => p.id === id);
+    if (index !== -1 && copyCart[index].quantity > 1) {
+      copyCart[index].quantity = copyCart[index].quantity - 1;
+    } else {
+      copyCart.splice(index, 1);
+    }
+    setCart(copyCart);
+    if (!copyCart.length) {
+      closeModalCart();
+    }
+  };
+
+  const deleteFromCart = (id: string) => {
+    const copyCart = JSON.parse(JSON.stringify(Cart));
+    const index = copyCart.findIndex((p: ICart) => p.id === id);
+    if (index !== -1) {
+      copyCart.splice(index, 1);
+      setCart(copyCart);
+    }
+    if (!copyCart.length) {
+      closeModalCart();
+    }
+  };
+
   const context = {
     productsList,
     setCart,
     isOpen,
     closeModalCart,
-    openModalCart
+    openModalCart,
+    addToCart,
+    deleteFromCart,
+    subtractFromCart
   };
   return <CartBLContext.Provider value={context}>{children}</CartBLContext.Provider>;
 };

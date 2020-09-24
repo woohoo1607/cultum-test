@@ -17,27 +17,32 @@ interface Props {
   id: string;
   name: string;
   img: string;
-  price: string;
+  price: number;
+  addToCart(id: string): void;
 }
 
-const Card: React.FC<Props> = ({ id, name, price, img }) => (
-  <CardWrapper key={id}>
-    <CardHeader>
-      <ProductsLink pId={id}>
-        <CardHeaderTitle>{name}</CardHeaderTitle>
-      </ProductsLink>
-    </CardHeader>
-    <CardImgWrapper>
-      <CardImg src={img} alt={`${name}-${id}`} />
-    </CardImgWrapper>
-    <CardFooter>
-      <ProductsLink pId={id}>
-        <ViewButton>Details</ViewButton>
-      </ProductsLink>
-      <CardFooterTitle>$ {price}</CardFooterTitle>
-      <ViewButton>Buy</ViewButton>
-    </CardFooter>
-  </CardWrapper>
-);
-
+const Card: React.FC<Props> = ({ id, name, price, img, addToCart }) => {
+  const add = (id) => () => {
+    addToCart(id);
+  };
+  return (
+    <CardWrapper key={id}>
+      <CardHeader>
+        <ProductsLink pId={id}>
+          <CardHeaderTitle>{name}</CardHeaderTitle>
+        </ProductsLink>
+      </CardHeader>
+      <CardImgWrapper>
+        <CardImg src={img} alt={`${name}-${id}`} />
+      </CardImgWrapper>
+      <CardFooter>
+        <ProductsLink pId={id}>
+          <ViewButton>Details</ViewButton>
+        </ProductsLink>
+        <CardFooterTitle>$ {price}</CardFooterTitle>
+        <ViewButton onClick={add(id)}>Buy</ViewButton>
+      </CardFooter>
+    </CardWrapper>
+  );
+};
 export { Card };

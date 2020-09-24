@@ -13,7 +13,10 @@ import { CartItem } from '../cart-item';
 import { CartBLContext } from '@md-sw-cart/layers/business';
 
 const CartModal = () => {
-  const { closeModalCart } = React.useContext(CartBLContext);
+  const { productsList, closeModalCart, deleteFromCart, addToCart, subtractFromCart } = React.useContext(CartBLContext);
+  const TotalPrice = productsList.reduce((sum: number, { quantity, price }) => {
+    return sum + quantity * price;
+  }, 0);
   return (
     <ModalWrapper>
       <ModalHeader>
@@ -21,9 +24,17 @@ const CartModal = () => {
         <ModalHeaderTitle>Cart</ModalHeaderTitle>
         <Button onClick={closeModalCart}>X</Button>
       </ModalHeader>
-      <CartItem />
+      {productsList.map((product) => (
+        <CartItem
+          {...product}
+          deleteFromCart={deleteFromCart}
+          addToCart={addToCart}
+          subtractFromCart={subtractFromCart}
+          key={product.id}
+        />
+      ))}
       <ModalFooter>
-        <ModalFooterTitle>Sum: $260</ModalFooterTitle>
+        <ModalFooterTitle>Sum: ${TotalPrice}</ModalFooterTitle>
         <Button>Buy</Button>
       </ModalFooter>
     </ModalWrapper>

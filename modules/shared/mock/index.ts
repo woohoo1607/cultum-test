@@ -71,7 +71,7 @@ export interface Product {
   country: string;
   gender: string;
   age: number;
-  price: string;
+  price: number;
   img: string;
 }
 
@@ -82,7 +82,7 @@ export const products: Product[] = [
     country: 'Denmark',
     gender: 'boy',
     age: 10,
-    price: '80',
+    price: 80,
     img: 'https://antoshka.ua/media/catalog/product/cache/1/image/840x/602f0fa2c1f0d1ba5e241f914e856ff9/6/2/6200466.jpg'
   },
   {
@@ -91,7 +91,7 @@ export const products: Product[] = [
     country: 'Denmark',
     gender: 'boy',
     age: 10,
-    price: '130',
+    price: 130,
     img: 'https://hotline.ua/img/tx/235/2354952435.jpg'
   },
   {
@@ -100,7 +100,7 @@ export const products: Product[] = [
     country: 'Denmark',
     gender: 'boy',
     age: 9,
-    price: '170',
+    price: 170,
     img: 'https://planettoys.ua/wp-content/uploads/lego-72557-planettoys-ua-5-1280x925.jpg'
   },
   {
@@ -109,7 +109,7 @@ export const products: Product[] = [
     country: 'Denmark',
     gender: 'unisex',
     age: 9,
-    price: '100',
+    price: 100,
     img: 'https://bi.ua/uploaded-images/products_photos/550480_2.jpg'
   },
   {
@@ -118,7 +118,7 @@ export const products: Product[] = [
     country: 'Denmark',
     gender: 'unisex',
     age: 9,
-    price: '129',
+    price: 129,
     img:
       'https://www.brickfanatics.com/wp-content/uploads/LEGO-Star-Wars-75292-The-Mandalorian-Bounty-Hunter-Transport-The-Razor-Crest-review-30.jpg'
   }
