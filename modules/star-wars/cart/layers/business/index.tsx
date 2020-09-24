@@ -36,6 +36,7 @@ const CartBLContextProvider: React.FC = ({ children }) => {
   ]);
   const [isOpen, setIsOpen] = React.useState(false);
   const { products } = React.useContext(ProductsCartAPIContext);
+  // @ts-ignore
   const productsList = React.useMemo<Pick<CartProduct, 'id' | 'name' | 'img' | 'price' | 'quantity'>[]>(() => {
     if (!products || !Cart.length) {
       return [];
