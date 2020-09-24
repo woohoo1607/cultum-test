@@ -22,7 +22,7 @@ interface Props {
 }
 
 const Card: React.FC<Props> = ({ id, name, price, img, addToCart }) => {
-  const add = (id) => () => {
+  const add = (id: string) => () => {
     addToCart(id);
   };
   return (
