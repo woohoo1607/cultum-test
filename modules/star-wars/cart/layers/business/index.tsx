@@ -38,10 +38,9 @@ const CartBLContextProvider: React.FC = ({ children }) => {
   const { products } = React.useContext(ProductsCartAPIContext);
   // @ts-ignore
   const productsList = React.useMemo<Pick<CartProduct, 'id' | 'name' | 'img' | 'price' | 'quantity'>[]>(() => {
-    if (!products || !Cart.length) {
+    if (!products.length || !Cart.length) {
       return [];
     }
-
     return Cart.map(({ id, quantity }: ICart) => {
       const product: Product = products.filter((product: Product) => product.id === id)[0];
       if (!product) {

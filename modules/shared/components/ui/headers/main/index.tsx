@@ -10,7 +10,8 @@ import { Wrapper, IWrapper, LWrapper, RWrapper } from './views';
 import { CartBLContext } from '@md-sw-cart/layers/business';
 
 const Header = () => {
-  const { openModalCart } = React.useContext(CartBLContext);
+  const { openModalCart, productsList } = React.useContext(CartBLContext);
+  const totalQuantity = productsList.length > 0 ? productsList.reduce((sum, { quantity }) => sum + quantity, 0) : 0;
   return (
     <Wrapper>
       <IWrapper>
@@ -21,7 +22,7 @@ const Header = () => {
           {menuItems.map(({ l, h }) => (
             <MenuItem key={l} href={h} label={l} />
           ))}
-          <CartLogo openModalCart={openModalCart} />
+          <CartLogo openModalCart={openModalCart} totalQuantity={totalQuantity} />
         </RWrapper>
       </IWrapper>
     </Wrapper>
