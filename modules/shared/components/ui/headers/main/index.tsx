@@ -7,8 +7,10 @@ import { CartLogo } from '@md-ui/logos/cart';
 import { menuItems } from './constants';
 // views
 import { Wrapper, IWrapper, LWrapper, RWrapper } from './views';
+import { CartBLContext } from '@md-sw-cart/layers/business';
 
 const Header = () => {
+  const { openModalCart } = React.useContext(CartBLContext);
   return (
     <Wrapper>
       <IWrapper>
@@ -19,7 +21,7 @@ const Header = () => {
           {menuItems.map(({ l, h }) => (
             <MenuItem key={l} href={h} label={l} />
           ))}
-          <CartLogo />
+          <CartLogo openModalCart={openModalCart} />
         </RWrapper>
       </IWrapper>
     </Wrapper>
