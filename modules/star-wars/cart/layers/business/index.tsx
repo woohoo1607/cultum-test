@@ -29,7 +29,7 @@ const CartBLContext = React.createContext<Context>({
   subtractFromCart: () => {}
 });
 const CartBLContextProvider: React.FC = ({ children }) => {
-  const { value: Cart, setValue: setCart } = useLocalStorage();
+  const { value: Cart, setValue: setCart } = useLocalStorage('cart');
   const [isOpen, setIsOpen] = React.useState(false);
   const { products } = React.useContext(ProductsCartAPIContext);
   // @ts-ignore
