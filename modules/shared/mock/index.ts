@@ -119,7 +119,6 @@ export const products: Product[] = [
     gender: 'unisex',
     age: 9,
     price: 129,
-    img:
-      'https://www.brickfanatics.com/wp-content/uploads/LEGO-Star-Wars-75292-The-Mandalorian-Bounty-Hunter-Transport-The-Razor-Crest-review-30.jpg'
+    img: 'https://d13ezvd6yrslxm.cloudfront.net/wp/wp-content/images/starwars-lego-mandalorian-frontpage-700x303.jpg'
   }
 ];

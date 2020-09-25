@@ -37,6 +37,14 @@ export const Button = styled.button`
   }
 `;
 
+export const EmptyCart = styled.p`
+  text-align: center;
+  font-size: 25px;
+  margin-top: 130px;
+  color: ${({ theme }) => theme.colors.gray500};
+  font-weight: bold;
+`;
+
 export const ModalFooter = styled.div`
   display: flex;
   justify-content: space-between;

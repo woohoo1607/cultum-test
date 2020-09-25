@@ -6,8 +6,8 @@ interface Props {
   totalQuantity: number;
 }
 const CartLogo: React.FC<Props> = ({ openModalCart, totalQuantity }) => (
-  <Wrapper>
-    <img src='/static/icons/cart.png' alt='cart-logo' onClick={openModalCart} />
+  <Wrapper onClick={openModalCart}>
+    <img src='/static/icons/cart.png' alt='cart-logo' />
     {!!totalQuantity && <span>{totalQuantity}</span>}
   </Wrapper>
 );

@@ -21,6 +21,7 @@
       "@md-sw-people/*": ["./modules/star-wars/people/*"],
       "@md-sw-cart/*": ["./modules/star-wars/cart/*"],
       "@md-sw-products/*": ["./modules/star-wars/products/*"],
+      "@md-sw-product/*": ["./modules/star-wars/product/*"],
       "@md-sw-person/*": ["./modules/star-wars/person/*"],
       "@md-ui/*": ["./modules/shared/components/ui/*"],
       "@md-utils/*": ["./modules/shared/utils/*"]

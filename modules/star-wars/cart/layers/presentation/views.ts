@@ -5,8 +5,13 @@ export const Wrapper = styled.div`
   top: calc(50% - 200px);
   left: calc(50% - 350px);
   right: 0;
-  height: 400px;
+  max-height: 400px;
+  min-height: 400px;
   width: 700px;
   z-index: 5;
   background-color: ${({ theme }) => theme.colors.white};
+  overflow: auto;
+  a {
+    text-decoration: none;
+  }
 `;

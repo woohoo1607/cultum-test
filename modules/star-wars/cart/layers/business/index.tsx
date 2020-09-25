@@ -1,6 +1,6 @@
 import * as React from 'react';
 // utils
-import { ICart } from '@md-utils/localStorage/query';
+import { ICart, useLocalStorage } from '@md-utils/localStorage/query';
 import { Product } from '@md-modules/shared/mock';
 import { ProductsCartAPIContext } from '../api/products';
 
@@ -18,7 +18,6 @@ interface Context {
   deleteFromCart(id: string): void;
   subtractFromCart(id: string): void;
 }
-/*const {value: productsList, setValue: setCart} = useLocalStorage();*/
 
 const CartBLContext = React.createContext<Context>({
   productsList: [],
@@ -30,10 +29,7 @@ const CartBLContext = React.createContext<Context>({
   subtractFromCart: () => {}
 });
 const CartBLContextProvider: React.FC = ({ children }) => {
-  const [Cart, setCart] = React.useState<ICart[]>([
-    { id: '1', quantity: 2 },
-    { id: '3', quantity: 3 }
-  ]);
+  const { value: Cart, setValue: setCart } = useLocalStorage();
   const [isOpen, setIsOpen] = React.useState(false);
   const { products } = React.useContext(ProductsCartAPIContext);
   // @ts-ignore

@@ -13,6 +13,7 @@ import {
   CartItemTotalPrice
 } from './views';
 import { CartItemQuantity } from '../cart-item-quantity';
+import { CartLink } from '../cart-link';
 interface Props {
   id: string;
   name: string;
@@ -40,7 +41,9 @@ const CartItem: React.FC<Props> = ({ name, img, quantity, id, price, subtractFro
       </CartItemImgWrapper>
       <CartItemInfo>
         <CartItemHeader>
-          <CartItemTitle> {name} </CartItemTitle>
+          <CartLink pId={id}>
+            <CartItemTitle> {name} </CartItemTitle>
+          </CartLink>
           <DeleteButton onClick={deleteItem(id)}>
             <img src='/static/icons/delete-icon.png' alt='delete-icon' />
           </DeleteButton>

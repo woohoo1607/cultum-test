@@ -6,9 +6,11 @@ export interface ICart {
 }
 
 export const useLocalStorage = () => {
-  const [value, setValue] = React.useState<ICart[]>(JSON.parse(localStorage.getItem('cart') as string) || []);
+  if (process.browser) {
+    const [value, setValue] = React.useState<ICart[]>(JSON.parse(localStorage.getItem('cart') as string) || []);
+    localStorage.setItem('cart', JSON.stringify(value));
 
-  localStorage.setItem('cart', JSON.stringify(value));
-
-  return { value, setValue };
+    return { value, setValue };
+  }
+  return { value: [], setValue: () => {} };
 };
