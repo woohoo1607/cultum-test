@@ -17,12 +17,10 @@
     "paths": {
       "@md-modules/*": ["./modules/*"],
       "@md-styles/*": ["./modules/shared/styles/*"],
-      "@md-star-wars/*": ["./modules/star-wars/*"],
-      "@md-sw-people/*": ["./modules/star-wars/people/*"],
-      "@md-sw-cart/*": ["./modules/star-wars/cart/*"],
-      "@md-sw-products/*": ["./modules/star-wars/products/*"],
-      "@md-sw-product/*": ["./modules/star-wars/product/*"],
-      "@md-sw-person/*": ["./modules/star-wars/person/*"],
+      "@md-shop/*": ["./modules/shop/*"],
+      "@md-shop-cart/*": ["./modules/shop/cart/*"],
+      "@md-shop-products/*": ["./modules/shop/products/*"],
+      "@md-shop-product/*": ["./modules/shop/product/*"],
       "@md-ui/*": ["./modules/shared/components/ui/*"],
       "@md-utils/*": ["./modules/shared/utils/*"]
     }

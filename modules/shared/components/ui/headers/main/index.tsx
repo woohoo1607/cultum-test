@@ -7,7 +7,7 @@ import { CartLogo } from '@md-ui/logos/cart';
 import { menuItems } from './constants';
 // views
 import { Wrapper, IWrapper, LWrapper, RWrapper } from './views';
-import { CartBLContext } from '@md-sw-cart/layers/business';
+import { CartBLContext } from '@md-shop-cart/layers/business';
 
 const Header = () => {
   const { openModalCart, productsList } = React.useContext(CartBLContext);

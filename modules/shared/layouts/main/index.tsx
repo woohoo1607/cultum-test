@@ -1,7 +1,7 @@
 import * as React from 'react';
 // view components
 import { Header } from '@md-ui/headers/main';
-import { CartContainer } from '@md-sw-cart/index';
+import { CartContainer } from '@md-shop-cart/index';
 // views
 import { Wrapper } from './views';
 
